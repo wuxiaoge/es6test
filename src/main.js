@@ -2,5 +2,8 @@ import Player from "./play"
 import "./l.less"
 
 let user = new Player("aaaa", 11);
-console.log(user.say());
+
+var _div = document.createElement("div");
+_div.innerHTML = user.say();
+document.querySelector("main").appendChild(_div);
 

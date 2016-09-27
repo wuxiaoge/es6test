@@ -1,5 +1,6 @@
 var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+//var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   entry: {
@@ -8,7 +9,7 @@ module.exports = {
   },
   output: {
     path: __dirname + "/builds",
-    filename: "[name].js"
+    filename: "js/[name].js"
   },
   module: {
     loaders: [
@@ -23,13 +24,39 @@ module.exports = {
       {
         test: /\.(css|less)$/i,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract("style", "css!less")
+        loader: "style!css!less" //ExtractTextPlugin.extract("style", "css!less")
+      },
+      {
+        test: /\.jpg$/i,
+        loader: "url",
+        query: {
+          limit: 30000,
+          mimetype: "image/jpg"
+        }
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin("style.css"),
-    new webpack.optimize.CommonsChunkPlugin("lib.js"),
-    new webpack.optimize.UglifyJsPlugin({minimize: true, compress:{warnings: false}})
+    //new ExtractTextPlugin("css/style.css"),
+    new HtmlWebpackPlugin({
+      chunks: ["main", "js/lib.js"],
+      minify: {collapseWhitespace:true},
+      title: "hello world",
+      template: "./src/html.tpl"
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ["app", "js/lib.js"],
+      minify: {collapseWhitespace:true},
+      title: "hello world",
+      template: "./src/html.tpl",
+      filename: "test.html"
+    }),
+    new webpack.optimize.CommonsChunkPlugin("js/lib.js"),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress:{
+        warnings: false
+      }
+    })
   ]
 }

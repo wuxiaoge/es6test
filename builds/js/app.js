@@ -1,0 +1,1 @@
+webpackJsonp([0],[function(o,t,n){"use strict";function a(o){return o&&o.__esModule?o:{"default":o}}var e=n(1),s=a(e);n(3);var l=new s["default"]("aaaa",11);console.log(l.say())},,,function(o,t,n){var a=n(4);"string"==typeof a&&(a=[[o.id,a,""]]);n(6)(a,{});a.locals&&(o.exports=a.locals)},function(o,t,n){t=o.exports=n(5)(),t.push([o.id,"html{font-size:21px}",""])}]);

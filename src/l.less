@@ -1,10 +1,25 @@
-@clr: #FFFFFF;
+@clr: #000;
 
-.buildColor(@c) {
+.buildColor(@c, @c2) {
   color: @c;
+  background-color: @c2;
 }
 
 html {
-  background-color: @clr;
-  .buildColor(@clr);
+  width:100%;
+  .buildColor(#FFF, @clr);
+}
+
+div {
+  .buildColor(@clr, #FFF);
+}
+
+#main {
+  width:100%;
+}
+
+.test {
+  width: 320px;
+  height: 153px;
+  background-image: url("test.jpg");
 }
