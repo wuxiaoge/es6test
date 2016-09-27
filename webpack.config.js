@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+//var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -33,6 +34,7 @@ module.exports = {
     ]
   },
   plugins: [
+//    new ExtractTextPlugin('s.css'),
     new webpack.optimize.CommonsChunkPlugin({names: ["lib"]}),
     new webpack.optimize.UglifyJsPlugin({minimize: true})
   ]
