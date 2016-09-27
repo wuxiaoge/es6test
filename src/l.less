@@ -1,0 +1,10 @@
+@clr: #FFFFFF;
+
+.buildColor(@c) {
+  color: @c;
+}
+
+html {
+  background-color: @clr;
+  .buildColor(@clr);
+}

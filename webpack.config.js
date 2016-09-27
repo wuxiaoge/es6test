@@ -1,9 +1,8 @@
 var webpack = require("webpack");
-//var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: {
-    lib: ["./src/user.js", "./src/play.js"],
     main: "./src/main.js",
     app: "./src/app.js"
   },
@@ -14,28 +13,28 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         exclude: /node_modules/,
         loader: "babel",
         query: {
           presets: ["es2015"]
         }
       },
+      //{
+      //  test: /\.css$/i,
+      //  exclude: /node_modules/,
+      //  loader: ExtractTextPlugin.extract("style", "css")
+      //},
       {
-        test: /\.css$/,
+        test: /\.(css|less)$/i,
         exclude: /node_modules/,
-        loader: "style!css",
-      },
-      {
-        test: /\.less$/,
-        exclude: /node_modules/,
-        loader: "style!css!less",
-      },
+        loader: ExtractTextPlugin.extract("style", "css!less")
+      }
     ]
   },
   plugins: [
-//    new ExtractTextPlugin('s.css'),
-    new webpack.optimize.CommonsChunkPlugin({names: ["lib"]}),
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    new ExtractTextPlugin("style.css"),
+    new webpack.optimize.CommonsChunkPlugin("lib.js"),
+    new webpack.optimize.UglifyJsPlugin({minimize: true, compress:{warnings: false}})
   ]
 }
