@@ -20,11 +20,6 @@ module.exports = {
           presets: ["es2015"]
         }
       },
-      //{
-      //  test: /\.css$/i,
-      //  exclude: /node_modules/,
-      //  loader: ExtractTextPlugin.extract("style", "css")
-      //},
       {
         test: /\.(css|less)$/i,
         exclude: /node_modules/,
