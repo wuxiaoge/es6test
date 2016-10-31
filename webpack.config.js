@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var autoprefixer = require('autoprefixer');
 //var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin")
 
@@ -24,7 +25,7 @@ module.exports = {
       {
         test: /\.(css|less)$/i,
         exclude: /node_modules/,
-        loader: "style!css!less" //ExtractTextPlugin.extract("style", "css!less")
+        loader: "style!css!postcss!less" //ExtractTextPlugin.extract("style", "css!less")
       },
       {
         test: /\.jpg$/i,
@@ -36,17 +37,19 @@ module.exports = {
       }
     ]
   },
+  postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
   plugins: [
     //new ExtractTextPlugin("css/style.css"),
     new HtmlWebpackPlugin({
       chunks: ["main", "js/lib.js"],
-      minify: {collapseWhitespace:true},
+      minify: {collapseWhitespace:true, removeComments:true},
       title: "hello world",
-      template: "./src/html.tpl"
+      template: "./src/html.tpl",
+      filename: "index.html"
     }),
     new HtmlWebpackPlugin({
       chunks: ["app", "js/lib.js"],
-      minify: {collapseWhitespace:true},
+      minify: {collapseWhitespace:true, removeComments:true},
       title: "hello world",
       template: "./src/html.tpl",
       filename: "test.html"
